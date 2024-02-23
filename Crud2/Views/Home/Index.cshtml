@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Crud2.Models.Product>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+<h2>Customer Info</h2>
+<div>
+    <p>
+        Lastname: Your_lastname <br />
+        Firstname: Your_Firstname <br />
+        City:  Centralia <br />
+        Country: USA <br />
+        Phone:(555) 1234 <br />
+    </p>
+</div>
+
+<h2>Products</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Package)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplierId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Package)
+        </td>
+        <td>
+            @Html.ActionLink("Order", "Details", "About", new { Id = item.Id }) |
+        </td>
+    </tr>
+}
+
+</table>
