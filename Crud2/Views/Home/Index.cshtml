@@ -6,8 +6,8 @@
 <h2>Customer Info</h2>
 <div>
     <p>
-        Lastname: Your_lastname <br />
-        Firstname: Your_Firstname <br />
+        Lastname: Gabriel <br />
+        Firstname: Keri <br />
         City:  Centralia <br />
         Country: USA <br />
         Phone:(555) 1234 <br />
@@ -48,7 +48,7 @@
             @Html.DisplayFor(modelItem => item.Package)
         </td>
         <td>
-            @Html.ActionLink("Order", "Details", "About", new { Id = item.Id }) |
+            @Html.ActionLink("Order", "About", "About", new { Id = item.Id }) |
         </td>
     </tr>
 }

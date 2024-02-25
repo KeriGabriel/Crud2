@@ -1,4 +1,5 @@
-﻿USE [GourmetShop]
+﻿
+USE [GourmetShop]
 GO
 
 SET ANSI_NULLS ON
@@ -7,7 +8,7 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [dbo].[InsertCustomerAndOrder_Lastname] 
+CREATE PROCEDURE [dbo].[InsertCustomerAndOrder_Gabriel] 
 @CustomerID INT,
 @FirstName NVARCHAR(40),
 @LastName NVARCHAR(40),
@@ -21,6 +22,7 @@ CREATE PROCEDURE [dbo].[InsertCustomerAndOrder_Lastname]
 @UnitPrice DECIMAL(12,2),
 @Quantity INT,
 @NewOrderID INT 
+
 AS
 BEGIN
 
