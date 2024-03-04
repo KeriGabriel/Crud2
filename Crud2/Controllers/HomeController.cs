@@ -1,5 +1,6 @@
 ﻿using Crud2;
 using Crud2.Data;
+using Crud2.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlTypes;
@@ -24,9 +25,9 @@ namespace Crud2.Controllers
         {
             return View();
         }
-        public ActionResult About()
+        public ActionResult About(Product product, Customer customer, Order order)
         {
-           
+           _data.AddToOrder(product, order, customer);
             return View();
         }
 

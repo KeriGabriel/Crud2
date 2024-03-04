@@ -1,0 +1,4 @@
+﻿USE [GourmetShop]
+GO
+DROP PROCEDURE [dbo].[InsertCustomerAndOrder_Gabriel],[dbo].[ProductList_Gabriel],[dbo].[NewCustomerSummary_Gabriel]
+GO

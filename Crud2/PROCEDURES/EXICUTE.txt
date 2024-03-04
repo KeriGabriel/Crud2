@@ -1,0 +1,105 @@
+﻿
+USE [GourmetShop]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[InsertCustomerAndOrder_Gabriel] 
+@CustomerID INT,
+@FirstName NVARCHAR(40),
+@LastName NVARCHAR(40),
+@City NVARCHAR(40),
+@Country NVARCHAR(40), 
+@Phone NVARCHAR(20),
+@TotalAmount DECIMAL(12,2),
+@OrderNumber NVARCHAR(10),
+@OrderItemId INT,
+@ProductId int,
+@UnitPrice DECIMAL(12,2),
+@Quantity INT,
+@NewOrderID INT 
+
+AS
+BEGIN
+
+INSERT INTO Customer(FirstName, LastName, City,Country, Phone)
+VALUES(@FirstName, @LastName, @City,@Country,@Phone)
+
+DECLARE @OrderLetters NVARCHAR(40)
+SET @OrderLetters = SUBSTRING (@LastName, 1, 1)
+DECLARE @Rand  float
+set @Rand =  RAND() * 1000
+
+SET @OrderNumber = STR(@Rand, 25, 5) + @OrderLetters
+SELECT @CustomerID = ID FROM  Customer  
+
+
+INSERT INTO [Order](OrderDate,OrderNumber, CustomerId, TotalAmount) 
+VALUES(GETDATE(),@OrderNumber,@CustomerID,@TotalAmount)
+
+DECLARE @OrderId INT
+SET @OrderId = SCOPE_IDENTITY()
+Select @ProductId = Id FROM Product
+INSERT INTO OrderItem (OrderId,ProductId,UnitPrice,Quantity)
+VALUES (@OrderId, @ProductId, @UnitPrice, @Quantity)
+
+END
+GO
+
+
+USE GourmetShop
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Keri Gabriel
+-- Create date: 2024
+-- Description:	Display the top 10 most recent orders
+-- =============================================
+CREATE PROCEDURE NewCustomerSummary_Gabriel 
+
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT TOP 10 *  
+	FROM 
+	[dbo].[Order]
+	ORDER BY [OrderDate]
+	DESC 
+END
+GO
+
+Use GourmetShop
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+-- =============================================
+-- Author:		Keri Gabriel
+-- Create date: Febuary 2024
+-- Description: Current Product List 
+-- =============================================
+CREATE PROCEDURE ProductList_Gabriel 
+AS
+BEGIN
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+    -- Insert statements for procedure here
+	SELECT * 
+	FROM Product
+	WHERE IsDiscontinued = 0 
+END
+GO
